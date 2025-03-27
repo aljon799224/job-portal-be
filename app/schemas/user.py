@@ -6,7 +6,7 @@ from pydantic import BaseModel, ConfigDict
 class UserBase(BaseModel):
     """User Base Class."""
 
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True, extra="ignore")
 
     username: str
     email: str | None = None

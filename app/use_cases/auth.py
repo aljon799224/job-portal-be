@@ -46,4 +46,5 @@ class AuthenticationUseCase:
         return {
             "access_token": access_token,
             "token_type": "bearer",
+            "user_id": user.id
         }

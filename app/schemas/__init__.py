@@ -11,8 +11,12 @@ from .user import (
     UserOut,  # noqa: F401
 )
 
-
 from .token import (
     Token,  # noqa: F401
     TokenPayload,  # noqa: F401
+)
+
+from .job import (
+    JobIn,
+    JobOut
 )
