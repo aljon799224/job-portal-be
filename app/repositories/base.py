@@ -7,7 +7,7 @@ from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from sqlalchemy import exc
+from sqlalchemy import exc, desc
 
 from app.db.base_class import Base
 from exceptions.exceptions import DatabaseException, APIException
@@ -35,7 +35,7 @@ class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     def get_all(self, db: Session) -> List[ModelType]:
         """Retrieve all records, with optional pagination."""
         try:
-            return db.query(self.model).all()
+            return db.query(self.model).order_by(desc(self.model.updated_at)).all()
         except Exception as e:
             # Log the exception (you may want to use your logger here)
             logger.error(f"Error fetching all items: {str(e)}")
