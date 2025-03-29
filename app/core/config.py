@@ -17,6 +17,7 @@ class Settings:
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1
     TOKEN_URL = API_PREFIX + "/auth/login/token"
     ALGORITHM = "HS256"
+    UPLOAD_DIR = "uploads/resumes/"
 
 
 settings = Settings()

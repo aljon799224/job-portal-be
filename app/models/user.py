@@ -18,3 +18,4 @@ class User(Base):
     hashed_password = Column(String, nullable=True)
 
     jobs = relationship("Job", back_populates="user", cascade="all, delete")
+    applications = relationship("Application", back_populates="user", cascade="all, delete")

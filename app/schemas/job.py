@@ -5,7 +5,7 @@ from datetime import datetime
 class JobBase(BaseModel):
     """Job Base Class."""
 
-    model_config = ConfigDict(from_attributes=True, extra="ignore")  # Ignores unexpected attributes
+    model_config = ConfigDict(from_attributes=True, extra="ignore")
 
     title: str
     description: str

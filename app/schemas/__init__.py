@@ -17,6 +17,11 @@ from .token import (
 )
 
 from .job import (
-    JobIn,
-    JobOut
+    JobIn,  # noqa: F401
+    JobOut  # noqa: F401
+)
+
+from .application import (
+    ApplicationIn,  # noqa: F401
+    ApplicationOut  # noqa: F401
 )
