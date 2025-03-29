@@ -20,3 +20,4 @@ class Job(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = relationship("User", back_populates="jobs")
+    applications = relationship("Application", back_populates="job", cascade="all, delete")

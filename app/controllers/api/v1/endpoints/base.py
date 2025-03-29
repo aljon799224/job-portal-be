@@ -1,5 +1,5 @@
 """Base Endpoint."""
-
+from app.controllers.api.v1.endpoints.application import application_router
 from app.controllers.api.v1.endpoints.auth import auth_router
 from app.controllers.api.v1.endpoints.item import item_router
 from app.controllers.api.v1.endpoints.job import job_router
@@ -13,3 +13,4 @@ def api_controller(app):
     app.include_router(user_router, prefix=f"{settings.API_PREFIX}", tags=["User"])
     app.include_router(auth_router, prefix=f"{settings.API_PREFIX}", tags=["Login"])
     app.include_router(job_router, prefix=f"{settings.API_PREFIX}", tags=["Job"])
+    app.include_router(application_router, prefix=f"{settings.API_PREFIX}", tags=["Application"])
