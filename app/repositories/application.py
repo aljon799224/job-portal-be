@@ -21,3 +21,13 @@ class ApplicationRepository(BaseRepository[Application, ApplicationIn, Applicati
         )
 
         return response
+
+    @staticmethod
+    def get_all_by_user_id(db: Session, *, user_id: int) -> List[Application]:
+        """Get by user id."""
+        response = cast(
+            List[Application],
+            db.query(Application).filter(Application.user_id == user_id).order_by(desc(Application.updated_at)).all(),
+        )
+
+        return response
