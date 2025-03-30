@@ -21,6 +21,12 @@ class UserIn(UserBase):
     password: str
 
 
+class UserUpdate(UserBase):
+    """User Patch Class."""
+
+    pass
+
+
 class UserOut(UserBase):
     """User Out Class."""
 

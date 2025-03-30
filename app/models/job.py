@@ -21,3 +21,4 @@ class Job(Base):
 
     user = relationship("User", back_populates="jobs")
     applications = relationship("Application", back_populates="job", cascade="all, delete")
+    saved_jobs = relationship("SavedJob", back_populates="job", cascade="all, delete")

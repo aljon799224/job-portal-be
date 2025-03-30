@@ -9,6 +9,7 @@ from .item import (
 from .user import (
     UserIn,  # noqa: F401
     UserOut,  # noqa: F401
+    UserUpdate  # noqa: F401
 )
 
 from .token import (
@@ -24,4 +25,10 @@ from .job import (
 from .application import (
     ApplicationIn,  # noqa: F401
     ApplicationOut  # noqa: F401
+)
+
+from .save_job import (
+    SavedJobIn,  # noqa: F401
+    SavedJobOut,  # noqa: F401
+    SavedJobsOut  # noqa: F401
 )

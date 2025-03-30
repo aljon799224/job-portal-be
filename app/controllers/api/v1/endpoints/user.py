@@ -14,8 +14,8 @@ user_router = APIRouter()
 
 @user_router.get("/user", response_model=Page[schemas.UserOut])
 def get_users(
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_active_user),
+        db: Session = Depends(get_db),
+        current_user: models.User = Depends(get_current_active_user),
 ):
     """Get all users."""
     user_uc = UserUseCase(db=db)
@@ -27,9 +27,9 @@ def get_users(
 
 @user_router.get("/user/{_id}", response_model=schemas.UserOut)
 def get_user(
-    _id: int,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_active_user),
+        _id: int,
+        db: Session = Depends(get_db),
+        current_user: models.User = Depends(get_current_active_user),
 ):
     """Get user by ID."""
     user_uc = UserUseCase(db=db)
@@ -51,13 +51,28 @@ def create(obj_in: schemas.UserIn, db: Session = Depends(get_db)):
 
 @user_router.delete("/user/{_id}", response_model=schemas.UserOut)
 def delete(
-    _id: int,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_active_user),
+        _id: int,
+        db: Session = Depends(get_db),
+        current_user: models.User = Depends(get_current_active_user),
 ):
     """Delete user by ID."""
     user_uc = UserUseCase(db=db)
 
     user = user_uc.delete_user(_id=_id)
+
+    return user
+
+
+@user_router.put("/user/{_id}", response_model=schemas.UserOut)
+def update(
+        _id: int,
+        obj_in: schemas.UserUpdate,
+        db: Session = Depends(get_db),
+        current_user: models.User = Depends(get_current_active_user),
+):
+    """Update User."""
+    user_uc = UserUseCase(db=db)
+
+    user = user_uc.update_user(_id=_id, obj_in=obj_in)
 
     return user
