@@ -56,6 +56,17 @@ class ApplicationUseCase:
             logger.error(f"Database error occurred while fetching application: {e.detail}")
             return JSONResponse(status_code=e.status_code, content={"detail": e.detail})
 
+    def get_application_by_user_and_job_id(self, user_id: int, job_id: int) -> Union[schemas.ApplicationOut, JSONResponse]:
+        """Get application record."""
+        try:
+            application = self.application_repository.get_by_user_id_and_job_id(self.db, user_id=user_id, job_id=job_id)
+
+            return schemas.ApplicationOut.model_validate(application)
+
+        except APIException as e:
+            logger.error(f"Database error occurred while fetching application: {e.detail}")
+            return JSONResponse(status_code=e.status_code, content={"detail": e.detail})
+
     def create_application(
             self,
             *,

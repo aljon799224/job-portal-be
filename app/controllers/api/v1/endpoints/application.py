@@ -2,7 +2,7 @@
 import json
 import os
 
-from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException
+from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException, Query
 from fastapi_pagination import Page
 from sqlalchemy.orm import Session
 from starlette.responses import FileResponse
@@ -54,6 +54,21 @@ def get_application(
     application_uc = ApplicationUseCase(db=db)
 
     application = application_uc.get_application(_id=_id)
+
+    return application
+
+
+@application_router.get("/applications/user-job", response_model=schemas.ApplicationOut)
+def get_application_user_and_job_id(
+        user_id: int = Query(..., description="User ID"),
+        job_id: int = Query(..., description="Job ID"),
+        db: Session = Depends(get_db),
+        current_user: models.User = Depends(get_current_active_user),
+):
+    """Get application by Job and user id."""
+    application_uc = ApplicationUseCase(db=db)
+
+    application = application_uc.get_application_by_user_and_job_id(user_id=user_id, job_id=job_id)
 
     return application
 
