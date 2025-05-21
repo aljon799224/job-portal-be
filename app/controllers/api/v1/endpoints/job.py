@@ -1,6 +1,9 @@
 """Job Endpoint."""
+import os
+import shutil
+import uuid
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, UploadFile, File
 from fastapi_pagination import Page
 from sqlalchemy.orm import Session
 
@@ -108,3 +111,18 @@ def delete(
     job = job_uc.delete_job(_id=_id)
 
     return job
+
+
+@job_router.post("/upload-logo/")
+async def upload_logo(file: UploadFile = File(...)):
+    file_ext = file.filename.split(".")[-1]
+    unique_name = f"{uuid.uuid4()}.{file_ext}"
+    upload_dir = "public/logos"
+
+    os.makedirs(upload_dir, exist_ok=True)
+    file_path = os.path.join(upload_dir, unique_name)
+
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    return {"filename": unique_name}

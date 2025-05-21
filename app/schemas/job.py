@@ -7,12 +7,14 @@ class JobBase(BaseModel):
 
     model_config = ConfigDict(from_attributes=True, extra="ignore")
 
-    title: str
-    description: str
+    title: str | None = None
+    description: str | None = None
     salary: str | None = None
     location: str
     tags: str | None = None
     is_remote: bool | None = None
+    logo: str | None = None
+    company: str | None = None
 
 
 class JobIn(JobBase):

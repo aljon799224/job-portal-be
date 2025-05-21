@@ -3,6 +3,7 @@
 from fastapi import FastAPI
 from fastapi_pagination import add_pagination
 from starlette.middleware.cors import CORSMiddleware
+from starlette.staticfiles import StaticFiles
 
 from app.controllers.api.v1.endpoints.base import api_controller
 from app.core.logging_config import setup_logging
@@ -19,5 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+app.mount("/public", StaticFiles(directory="public"), name="public")
 api_controller(app)
 add_pagination(app)

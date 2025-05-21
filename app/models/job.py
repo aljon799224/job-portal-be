@@ -10,12 +10,14 @@ class Job(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)  # Links to User table
-    title = Column(String, nullable=False)
-    description = Column(Text, nullable=False)
-    salary = Column(String, nullable=True)  # Can store range or amount as string
-    location = Column(String, nullable=False)
-    tags = Column(String, nullable=True)  # Store comma-separated keywords
+    title = Column(String, nullable=True)
+    company = Column(String, nullable=True)
+    description = Column(Text, nullable=True)
+    salary = Column(String, nullable=True)
+    location = Column(String, nullable=True)
+    tags = Column(String, nullable=True)
     is_remote = Column(Boolean, default=True)
+    logo = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
